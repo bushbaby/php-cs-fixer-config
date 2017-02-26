@@ -1,0 +1,30 @@
+{
+  "name": "plhw/hf-cs-fixer-config",
+  "description": "PHP CS Fixer config for plhw components",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Miertsch",
+      "email": "contact@prooph.de",
+      "homepage": "http://www.codeliner.ws/"
+    },
+    {
+      "name": "Sascha-Oliver Prolic",
+      "email": "saschaprolic@googlemail.com"
+    },
+    {
+      "name": "Bas Kamer",
+      "email": "baskamer@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "friendsofphp/php-cs-fixer": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "HF\\CS\\": "src"
+    }
+  }
+}
