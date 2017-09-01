@@ -1,15 +1,16 @@
 <?php
 /**
- * This file is part of the plhw/php-cs-fixer-config.
+ * This file is part of the bushbaby/cs-fixer-config.
  * (c) 2016-2016 prooph software GmbH <contact@prooph.de>
  * (c) 2016-2016 Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
+ * (c) 2016-2017 Bas Kamer <baskamer@gmail.com>.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace HF\CS;
+namespace Bsb\CS;
 
 use PhpCsFixer\Config as PhpCsFixerConfig;
 
@@ -114,7 +115,7 @@ class Config extends PhpCsFixerConfig
 
     public function __construct(array $overrides = [])
     {
-        parent::__construct('plhw-hf');
+        parent::__construct('bushbaby php-cs-fixer-config');
 
         $this->config = array_merge($this->defaults, $overrides);
 

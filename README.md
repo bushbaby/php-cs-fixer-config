@@ -1,6 +1,6 @@
 # php-cs-fixer-config
 
-PHP CS Fixer config for healthy feet components
+PHP CS Fixer config
 
 It's based on the ideas of [`refinery29/php-cs-fixer-config`](https://github.com/refinery29/php-cs-fixer-config/).
 
@@ -9,7 +9,7 @@ It's based on the ideas of [`refinery29/php-cs-fixer-config`](https://github.com
 Run
 
 ```
-$ composer require --dev plhw/php-cs-fixer-config
+$ composer require --dev bushbaby/php-cs-fixer-config
 ```
   
 ## Usage
@@ -21,7 +21,7 @@ Create a configuration file `.php_cs` in the root of your project:
 ```php
 <?php
 
-$config = new HF\CS\Config();
+$config = new Bsb\CS\Config();
 $config->getFinder()->in(__DIR__);
 
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;

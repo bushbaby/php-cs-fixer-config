@@ -1,6 +1,6 @@
 {
-  "name": "plhw/hf-cs-fixer-config",
-  "description": "PHP CS Fixer config for plhw components",
+  "name": "bushbaby/php-cs-fixer-config",
+  "description": "PHP CS Fixer config",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "HF\\CS\\": "src"
+      "Bsb\\CS\\": "src"
     }
   }
 }

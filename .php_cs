@@ -1,6 +1,6 @@
 <?php
 
-$config = new \HF\CS\Config();
+$config = new \Bsb\CS\Config();
 $config->getFinder()->in(__DIR__)->exclude([]);
 
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
