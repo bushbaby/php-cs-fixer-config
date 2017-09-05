@@ -20,7 +20,7 @@ class Config extends PhpCsFixerConfig
      * @var array
      */
     private $defaults = [
-        '@PHP71Migration'        => true,
+        '@PHP70Migration'        => true,
         '@PSR2'                  => true,
         '@Symfony'               => true,
         'array_syntax'           => ['syntax' => 'short'],
