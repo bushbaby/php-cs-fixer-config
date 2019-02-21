@@ -1,0 +1,14 @@
+Bushbaby's PHP code style fixer.
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+@see       https://bushbaby.nl/
+
+@copyright Copyright (c) 2016-%year% prooph software GmbH <contact@prooph.de>
+@copyright Copyright (c) 2016-%year% Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
+@copyright Copyright (c) 2010-%year% bushbaby multimedia. (https://bushbaby.nl)
+@author    Bas Kamer <baskamer@gmail.com>
+@license   MIT
+
+@package   %package%
