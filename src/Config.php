@@ -8,9 +8,9 @@
  *
  * @see       https://bushbaby.nl/
  *
- * @copyright Copyright (c) 2016-2019 prooph software GmbH <contact@prooph.de>
- * @copyright Copyright (c) 2016-2019 Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
- * @copyright Copyright (c) 2010-2019 bushbaby multimedia. (https://bushbaby.nl)
+ * @copyright Copyright (c) 2016-2021 prooph software GmbH <contact@prooph.de>
+ * @copyright Copyright (c) 2016-2021 Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
+ * @copyright Copyright (c) 2010-2021 bushbaby multimedia. (https://bushbaby.nl)
  * @author    Bas Kamer <baskamer@gmail.com>
  * @license   MIT
  *
@@ -33,13 +33,9 @@ class Config extends PhpCsFixerConfig
         '@PSR2' => true,
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
-        'binary_operator_spaces' => [
-            'align_double_arrow' => false,
-            'align_equals' => false,
-        ],
-        'blank_line_after_namespace' => true,
+         'blank_line_after_namespace' => true,
         'blank_line_after_opening_tag' => true,
-        'blank_line_before_return' => true,
+        'blank_line_before_statement' => true,
         'braces' => true,
         'cast_spaces' => true,
         'class_definition' => true,
@@ -51,9 +47,9 @@ class Config extends PhpCsFixerConfig
         'full_opening_tag' => true,
         'function_declaration' => true,
         'function_typehint_space' => true,
-        'hash_to_slash_comment' => true,
+        'single_line_comment_style' => true,
         'header_comment' => [
-            'commentType' => 'PHPDoc',
+            'comment_type' => 'PHPDoc',
             'header' => 'Bushbaby was here at `%package%` in `%year%`! Please create a .docheader in the project root and run `composer cs-fix`',
             'location' => 'after_open',
             'separate' => 'both',
@@ -62,10 +58,10 @@ class Config extends PhpCsFixerConfig
         'indentation_type' => true,
         'line_ending' => true,
         'linebreak_after_opening_tag' => true,
-        'lowercase_constants' => true,
+        'constant_case' => true,
         'lowercase_keywords' => true,
         'method_argument_space' => true,
-        'method_separation' => true,
+        'class_attributes_separation' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
         'native_function_invocation' => true,
@@ -74,13 +70,13 @@ class Config extends PhpCsFixerConfig
         'no_blank_lines_after_class_opening' => true,
         'no_closing_tag' => true,
         'no_empty_statement' => true,
-        'no_extra_consecutive_blank_lines' => true,
+        'no_extra_blank_lines' => true,
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
         'no_multiline_whitespace_around_double_arrow' => true,
-        'no_multiline_whitespace_before_semicolons' => true,
+        'multiline_whitespace_before_semicolons' => true,
         'no_short_bool_cast' => true,
-        'no_short_echo_tag' => true,
+        'echo_tag_syntax' => ['format' => 'long'],
         'no_singleline_whitespace_before_semicolons' => true,
         'no_spaces_around_offset' => true,
         'no_spaces_inside_parenthesis' => true,
@@ -99,8 +95,10 @@ class Config extends PhpCsFixerConfig
         'object_operator_without_whitespace' => true,
         'ordered_imports' => true,
         'phpdoc_indent' => true,
-        'phpdoc_inline_tag' => true,
-        'psr4' => true,
+        'general_phpdoc_tag_rename' => true,
+        'phpdoc_inline_tag_normalizer' => true,
+        'phpdoc_tag_type' => true,
+        'psr_autoloading' => true,
         'return_type_declaration' => true,
         'semicolon_after_instruction' => true,
         'short_scalar_cast' => true,
@@ -115,7 +113,7 @@ class Config extends PhpCsFixerConfig
         'switch_case_semicolon_to_colon' => true,
         'switch_case_space' => true,
         'ternary_operator_spaces' => true,
-        'trailing_comma_in_multiline_array' => true,
+        'trailing_comma_in_multiline' => ['elements' => ['arrays']],
         'trim_array_spaces' => true,
         'unary_operator_spaces' => true,
         'visibility_required' => true,
@@ -126,7 +124,7 @@ class Config extends PhpCsFixerConfig
     {
         parent::__construct('bushbaby php-cs-fixer-config');
 
-        $this->setRules(\array_merge($this->defaults, $overrides));
+        $this->setRules(array_merge($this->defaults, $overrides));
         $this->setRiskyAllowed(true);
     }
 
@@ -141,23 +139,23 @@ class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
-        if (\file_exists('.docheader')) {
-            $header = \file_get_contents('.docheader');
+        if (file_exists('.docheader')) {
+            $header = file_get_contents('.docheader');
         } else {
             $header = $rules['header'];
         }
 
         // remove comments from existing .docheader or crash
-        $header = \str_replace(['/**', ' */', ' * ', ' *'], '', $header);
+        $header = str_replace(['/**', ' */', ' * ', ' *'], '', $header);
         $package = 'unknown';
 
-        if (\file_exists('composer.json')) {
-            $package = \json_decode(\file_get_contents('composer.json'))->name ?? 'unknown/unknown';
+        if (file_exists('composer.json')) {
+            $package = json_decode(file_get_contents('composer.json'))->name ?? 'unknown/unknown';
         }
 
-        $header = \str_replace(['%package%', '%year%'], [$package, (new \DateTime('now'))->format('Y')], $header);
+        $header = str_replace(['%package%', '%year%'], [$package, (new \DateTime('now'))->format('Y')], $header);
 
-        $rules['header'] = \trim($header);
+        $rules['header'] = trim($header);
 
         return $rules;
     }

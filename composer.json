@@ -19,12 +19,16 @@
     }
   ],
   "require": {
-    "php": "^7.1",
-    "friendsofphp/php-cs-fixer": "^2.1"
+    "php": "^7.1.3 || ^8.0",
+    "friendsofphp/php-cs-fixer": "^3.0"
   },
   "autoload": {
     "psr-4": {
       "Bsb\\CS\\": "src"
     }
+  },
+  "scripts": {
+    "php-check": "php-cs-fixer fix --dry-run",
+    "php-fix": "php-cs-fixer fix"
   }
 }
