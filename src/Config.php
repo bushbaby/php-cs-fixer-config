@@ -8,9 +8,9 @@
  *
  * @see       https://bushbaby.nl/
  *
- * @copyright Copyright (c) 2016-2021 prooph software GmbH <contact@prooph.de>
- * @copyright Copyright (c) 2016-2021 Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
- * @copyright Copyright (c) 2010-2021 bushbaby multimedia. (https://bushbaby.nl)
+ * @copyright Copyright (c) 2016 prooph software GmbH <contact@prooph.de>
+ * @copyright Copyright (c) 2016 Sascha-Oliver Prolic <saschaprolic@googlemail.com>.
+ * @copyright Copyright (c) 2010 bushbaby multimedia. (https://bushbaby.nl)
  * @author    Bas Kamer <baskamer@gmail.com>
  * @license   MIT
  *
@@ -33,7 +33,7 @@ class Config extends PhpCsFixerConfig
         '@PSR2' => true,
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
-         'blank_line_after_namespace' => true,
+        'blank_line_after_namespace' => true,
         'blank_line_after_opening_tag' => true,
         'blank_line_before_statement' => true,
         'braces' => true,
@@ -47,10 +47,9 @@ class Config extends PhpCsFixerConfig
         'full_opening_tag' => true,
         'function_declaration' => true,
         'function_typehint_space' => true,
-        'single_line_comment_style' => true,
         'header_comment' => [
             'comment_type' => 'PHPDoc',
-            'header' => 'Bushbaby was here at `%package%` in `%year%`! Please create a .docheader in the project root and run `composer cs-fix`',
+            'header' => 'PLHW was here at `%package%` in `%year%`! Please create a .docheader in the project root and run `composer cs-fix`',
             'location' => 'after_open',
             'separate' => 'both',
         ],
@@ -64,7 +63,13 @@ class Config extends PhpCsFixerConfig
         'class_attributes_separation' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
-        'native_function_invocation' => true,
+        'native_function_invocation' => [
+            'include' => ['@all'],
+            'scope' => 'all',
+            'strict' => true, // or remove this line, as false is default value
+        ],
+        'global_namespace_import' => ['import_classes' => false, 'import_constants' => false, 'import_functions' => false],
+        'no_extra_blank_lines' => ['tokens' => ['use']],
         'new_with_braces' => true,
         'no_alias_functions' => true,
         'no_blank_lines_after_class_opening' => true,
@@ -80,8 +85,7 @@ class Config extends PhpCsFixerConfig
         'no_singleline_whitespace_before_semicolons' => true,
         'no_spaces_around_offset' => true,
         'no_spaces_inside_parenthesis' => true,
-        'no_trailing_comma_in_list_call' => true,
-        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_comma_in_singleline' => true,
         'no_trailing_whitespace_in_comment' => true,
         'no_unneeded_control_parentheses' => true,
         'no_unreachable_default_argument_value' => true,
@@ -124,7 +128,7 @@ class Config extends PhpCsFixerConfig
     {
         parent::__construct('bushbaby php-cs-fixer-config');
 
-        $this->setRules(array_merge($this->defaults, $overrides));
+        $this->setRules(\array_merge($this->defaults, $overrides));
         $this->setRiskyAllowed(true);
     }
 
@@ -139,23 +143,23 @@ class Config extends PhpCsFixerConfig
 
     private function headerComment(array $rules): array
     {
-        if (file_exists('.docheader')) {
-            $header = file_get_contents('.docheader');
+        if (\file_exists('.docheader')) {
+            $header = \file_get_contents('.docheader');
         } else {
             $header = $rules['header'];
         }
 
         // remove comments from existing .docheader or crash
-        $header = str_replace(['/**', ' */', ' * ', ' *'], '', $header);
+        $header = \str_replace(['/**', ' */', ' * ', ' *'], '', $header);
         $package = 'unknown';
 
-        if (file_exists('composer.json')) {
-            $package = json_decode(file_get_contents('composer.json'))->name ?? 'unknown/unknown';
+        if (\file_exists('composer.json')) {
+            $package = \json_decode(\file_get_contents('composer.json'))->name ?? 'unknown/unknown';
         }
 
-        $header = str_replace(['%package%', '%year%'], [$package, (new \DateTime('now'))->format('Y')], $header);
+        $header = \str_replace(['%package%', '%year%'], [$package, (new \DateTime('now'))->format('Y')], $header);
 
-        $rules['header'] = trim($header);
+        $rules['header'] = \trim($header);
 
         return $rules;
     }

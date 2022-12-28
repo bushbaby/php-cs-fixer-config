@@ -28,7 +28,11 @@
     }
   },
   "scripts": {
-    "php-check": "php-cs-fixer fix --dry-run",
-    "php-fix": "php-cs-fixer fix"
+    "check": [
+      "@cs",
+      "@test"
+    ],
+    "cs": "php-cs-fixer fix -v --diff --dry-run",
+    "cs-fix": "php-cs-fixer fix -v --diff"
   }
 }
